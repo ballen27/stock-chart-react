@@ -58,11 +58,12 @@ const StockQuote = ({stockName}) => {
             </div>
             <div style={styles.price}>
               <h1>{stocks[stockName].price}</h1>
+              <p>$1.03 &#40;1.3%&#41;</p>
             </div>
           </div>
           <div style={styles.chartContainer}>
             <button onClick={regenerateData}>Change Data</button>
-            <StockChart  data={data} width={600} height={300}/>
+            <StockChart  data={data} width={720} height={300}/>
           </div>
         </div>
       </div>
@@ -74,7 +75,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     padding: '24px',
-    width: '700px',
+    width: '800px',
     margin: '50px auto',
     backgroundColor: '#f7f7f7',
   },
