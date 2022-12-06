@@ -24,7 +24,7 @@ const container = `#container-${name}`
     const yMaxValue = d3.max(data, d => (d.open.toFixed(2)));
     const xMinValue = d3.min(data, d => new Date(d.date));
     const xMaxValue = d3.max(data, d => new Date(d.date));
-    console.log(xMinValue)
+
     const svg = d3
         .select(container)
         .append('svg')
@@ -84,7 +84,7 @@ const container = `#container-${name}`
         .attr('class', 'line') 
         .attr('d', line);
 
-    //Setup tooltip
+    //Setup tooltip could get it working
     // const focus = svg
     //     .append('g')
     //     .attr('class', 'focus')

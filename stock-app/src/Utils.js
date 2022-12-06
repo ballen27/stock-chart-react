@@ -4,7 +4,7 @@ export const getRandomIntInclusive = (min, max) => {
   return (Math.random() * (max - min + 1) + min).toFixed(2); // The maximum is inclusive and the minimum is inclusive
 }
 
-
+//generates dummy data in the form of a response from the quote endpoint below
 export const generateQuote = () => {
   const quoteData = []
   const msftPrice = parseFloat(getRandomIntInclusive(230.00, 260.00))
@@ -63,15 +63,13 @@ export const generateQuote = () => {
   return quoteData
 }
 
-// export const stockData = regenerateData()
 export const stockData = generateQuote()
 
+//helper for dynamically generating chart data
 export const generateChart = () => {
   let initialChart = generateQuote()
   let chartData = [...initialChart]
 }
-
-generateChart()
 
 export const dummyChartMsft = [
   {
@@ -271,3 +269,28 @@ export const dummyChartAmzn = [
     "volume" : 76885430
   },
 ]
+
+
+/* utils for requesting real data from the FMP stock endpoints
+* requires signup to get an API key 
+* Limited to 250 requests per day
+* dummy data above is modeled after responses from these two endpoints
+* Also looked into Morningstar API but no demo/test versions, needed to talk to sales to set up real account
+*/
+const requestStockQuote = () => {
+  fetch('https://financialmodelingprep.com/api/v3/quote/MSFT,AAPL,AMZN?apikey=YOUR_API_KEY')
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+const requestHistoricalStockPrice = () => {
+  fetch('https://financialmodelingprep.com/api/v3/historical-chart/1min/AAPL?apikey=YOUR_API_KEY')
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
