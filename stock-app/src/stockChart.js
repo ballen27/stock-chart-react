@@ -19,10 +19,10 @@ function StockChart({ data, width, height }) {
       .remove();
 
     const margin = { top: 50, right: 50, bottom: 50, left: 50 };
-    const yMinValue = d3.min(data, d => d.value);
-    const yMaxValue = d3.max(data, d => d.value);
-    const xMinValue = d3.min(data, d => d.label);
-    const xMaxValue = d3.max(data, d => d.label);
+    const yMinValue = d3.min(data, d => d.price);
+    const yMaxValue = d3.max(data, d => d.price);
+    const xMinValue = d3.min(data, d => d.date);
+    const xMaxValue = d3.max(data, d => d.date);
 
     const svg = d3
         .select('#container')
@@ -44,8 +44,8 @@ function StockChart({ data, width, height }) {
         
     const line = d3
         .line()
-        .x(d => xScale(d.label))
-        .y(d => yScale(d.value))
+        .x(d => xScale(d.date))
+        .y(d => yScale(d.price))
             
     
     //Draw gridlines and tick markers
@@ -105,23 +105,23 @@ function StockChart({ data, width, height }) {
         .on("mousemove", mousemove);
 
         function mousemove(event) {
-            const bisect = d3.bisector(d => d.label).left;
+            const bisect = d3.bisector(d => d.date).left;
             const xPos = d3.mouse(this)[0]; 
             const x0 = bisect(data, xScale.invert(xPos));
             const d0 = data[x0];
             focus.attr(
                 'transform',
-                `translate(${xScale(d0.label)},${yScale(d0.value)})`,
+                `translate(${xScale(d0.date)},${yScale(d0.price)})`,
             );
             tooltip
                 .transition()
                 .duration(200)
                 .style('opacity', 0.9);
             tooltip
-                .html(d0.tooltipContent || d0.label)
+                .html(d0.tooltipContent || d0.date)
                 .style(
                     'transform',
-                    `translate(${xScale(d0.label) + 50}px,${yScale(d0.value) - 330}px)`,
+                    `translate(${xScale(d0.date) + 50}px,${yScale(d0.price) - 330}px)`,
                 );
         }
   }
@@ -164,7 +164,7 @@ export default StockChart;
       
 //         data.forEach((d) => {
 //           d.date = parseTime(d.date);
-//           d.value = +d.value;
+//           d.price = +d.price;
 //         });
 //         console.log(data) 
     
@@ -185,7 +185,7 @@ export default StockChart;
 //         const y = d3.scaleLinear().range([height, 0]);
     
 //         x.domain(d3.extent(data, (d) => { return d.date; }));
-//         y.domain([0, d3.max(data, (d) => { return d.value; })]);
+//         y.domain([0, d3.max(data, (d) => { return d.price; })]);
       
 //         svg.append("g")
 //           .attr("transform", `translate(0, ${height})`)
@@ -197,7 +197,7 @@ export default StockChart;
 //         // add the Line
 //         const valueLine = d3.line()
 //         .x((d) => { return x(d.date); })
-//         .y((d) => { return y(d.value); });
+//         .y((d) => { return y(d.price); });
       
 //         svg.append("path")
 //           .data([data])

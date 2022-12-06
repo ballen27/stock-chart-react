@@ -1,47 +1,63 @@
 import './index.css'
 import React, { useEffect, useState } from "react";
 import StockChart from './stockChart';
+import {stockData} from './Utils'
 
 
 const StockQuote = ({stockName}) => {
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(stockData);
 
   // useEffect(() => {
   //   regenerateData()
   // })
 
+  // setInterval( regenerateData, 5000)
   function regenerateData() {
     const chartData = [];
     for (let i = 0; i < 20; i++) {
-      const value = Math.floor(Math.random() * i + 3);
+      const price = Math.floor(Math.random() * i + 3);
       chartData.push({
-        label: i,
-        value,
-        tooltipContent: `<b>Date: </b>${i}<br><b>Price: </b>${value}`
+        date: i,
+        price,
+        tooltipContent: `<b>date: </b>${i}<br><b>price: </b>${price}`
       });
     }
     setData(chartData)
   }
+
+  // function regenerateData() {
+  //   const chartData = [...data]
+  //   console.log(chartData.length - 1)
+  //   const lastDate = chartData[chartData.length - 1]
+  //   const price = getRandomIntInclusive(230.00, 260.00)
+  //   chartData.push({
+  //     date: lastDate + 1,
+  //     price,
+  //     tooltipContent: `<b>date: </b>${10}<br><b>price: </b>${price}`
+  //   });
+  //   console.log(chartData)
+  //   setData(chartData)
+  // }
 
   const stocks = {
     microsoft: {
       name: 'Microsoft Corp',
       ticker: 'NASDAQ: MSFT',
       logo: 'https://api.twelvedata.com/logo/microsoft.com',
-      price: '$240.23'
+      date: '$240.23'
     },
     apple: {
       name: 'Apple Inc',
       ticker: 'NASDAQ: AAPL',
       logo: 'https://financialmodelingprep.com/image-stock/AAPL.png',
-      price: '$101.01'
+      date: '$101.01'
     },
     amazon: {
       name: 'Amazon.com Inc',
       ticker: 'NASDAQ: AMZN',
       logo: 'https://financialmodelingprep.com/image-stock/AMZN.png',
-      price: '$91.01'
+      date: '$91.01'
     }
   }
 
@@ -56,8 +72,8 @@ const StockQuote = ({stockName}) => {
                 <p>{stocks[stockName].ticker}</p>
               </div>
             </div>
-            <div style={styles.price}>
-              <h1>{stocks[stockName].price}</h1>
+            <div style={styles.date}>
+              <h1>{stocks[stockName].date}</h1>
               <p>$1.03 &#40;1.3%&#41;</p>
             </div>
           </div>
@@ -94,7 +110,7 @@ const styles = {
   priceName: {
     margin: '8px auto',
   },
-  price: {
+  date: {
     margin: '8px 16px',
   },
   chartContainer: {
