@@ -10,6 +10,14 @@ export const generateQuote = () => {
   const msftPrice = parseFloat(getRandomIntInclusive(230.00, 260.00))
   const aaplPrice = parseFloat(getRandomIntInclusive(130.00, 165.00))
   const amznPrice = parseFloat(getRandomIntInclusive(90.00, 100.00))
+
+  const msftChange = parseFloat(getRandomIntInclusive(0.99, 10.00))
+  const msftChangesPercentage = parseFloat(getRandomIntInclusive(0.01, 15.00))
+  const aaplChange = parseFloat(getRandomIntInclusive(0.99, 10.00))
+  const aaplChangesPercentage = parseFloat(getRandomIntInclusive(0.01, 15.00))
+  const amznChange = parseFloat(getRandomIntInclusive(0.99, 10.00))
+  const amznChangesPercentage = parseFloat(getRandomIntInclusive(0.01, 15.00))
+
   const timestamp = Date.now()
   const formattedTimestamp = timestamp.toLocaleString("en-US", {
     day: "2-digit",
@@ -22,8 +30,8 @@ export const generateQuote = () => {
       symbol : "MSFT",
       name : "Microsoft Corp",
       price : msftPrice,
-      changesPercentage : 0.38934135,
-      change: 0.58000183,
+      changesPercentage : msftChangesPercentage,
+      change: msftChange,
       volume : 97750498,
       exchange : "NASDAQ",
       open : 150.63000000,
@@ -33,8 +41,8 @@ export const generateQuote = () => {
       symbol : "AAPL",
       name : "Apple Inc",
       price : aaplPrice,
-      changesPercentage : 0.38934135,
-      change: 0.58000183,
+      changesPercentage : aaplChangesPercentage,
+      change: aaplChange,
       volume : 97750498,
       exchange : "NASDAQ",
       open : 150.63000000,
@@ -44,8 +52,8 @@ export const generateQuote = () => {
       symbol : "AMZN",
       name : "Amazon.com Inc",
       price : amznPrice,
-      changesPercentage : 0.38934135,
-      change: 0.58000183,
+      changesPercentage : amznChangesPercentage,
+      change: amznChange,
       volume : 97750498,
       exchange : "NASDAQ",
       open : 150.63000000,

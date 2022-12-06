@@ -50,10 +50,13 @@ const StockQuote = ({quote}) => {
                 <p>7D</p>
               </div>
               <div style={styles.dateDeselect}>
-                <p>30D</p>
+                <p>1M</p>
               </div>
               <div style={styles.dateDeselect}>
-                <p>1Y</p>
+                <p>YTD</p>
+              </div>
+              <div style={styles.dateDeselect}>
+                <p>5Y</p>
               </div>
             </div>
             <StockChart  data={stocks[quote.symbol].data} width={700} height={300} name={quote.symbol} />

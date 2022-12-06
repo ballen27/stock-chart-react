@@ -7,13 +7,13 @@ function App() {
 
   const [stockData, setStockData] = useState(generateQuote)
 
-  // useEffect(() => {
-  //   let interval = setInterval(() => {
-  //     setStockData(generateQuote)
-  //   }, 5000)
+  useEffect(() => {
+    let interval = setInterval(() => {
+      setStockData(generateQuote)
+    }, 5000)
 
-  //   return () => clearInterval(interval)
-  // }, [stockData])
+    return () => clearInterval(interval)
+  }, [stockData])
 
   return (
     <div className="App">
