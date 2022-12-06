@@ -1,7 +1,7 @@
 export const getRandomIntInclusive = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
+  return (Math.random() * (max - min + 1) + min).toFixed(2); // The maximum is inclusive and the minimum is inclusive
 }
 
 const regenerateData = () => {
@@ -17,84 +17,82 @@ const regenerateData = () => {
     return chartData
   }
 
-export const stockData = regenerateData()
-
-// export const stockData = [
-//   {
-//     date: new Date(),
-//     price: getRandomIntInclusive(230.00, 260.00),
-//     tooltipContent: `<b>date: </b>${10}<br><b>price: </b>${this.price}`
-//   }
-// ]
-
-export const dummyStockData = [
-    {
-      "date" : "2020-03-02 15:59:00",
-      "open" : 297.230000000000,
-      "low" : 297.230000000000,
-      "high" : 298.280000000000,
-      "close" : 298.252300000000,
-      "volume" : 78679246
-    }, 
-    {
-      "date" : "2020-03-02 15:58:00",
-      "open" : 296.190000000000,
-      "low" : 296.190000000000,
-      "high" : 297.430000000000,
-      "close" : 297.230000000000,
-      "volume" : 77982786
-    }, 
-    {
-      "date" : "2020-03-02 15:57:00",
-      "open" : 295.860000000000,
-      "low" : 295.860000000000,
-      "high" : 296.580000000000,
-      "close" : 296.190000000000,
-      "volume" : 77400704
-    }, 
-    {
-      "date" : "2020-03-02 15:56:00",
-      "open" : 297.100000000000,
-      "low" : 295.578600000000,
-      "high" : 297.100000000000,
-      "close" : 295.860000000000,
-      "volume" : 76885430
-    },
-    {
-      "date" : "2020-03-02 15:55:00",
-      "open" : 297.230000000000,
-      "low" : 297.230000000000,
-      "high" : 298.280000000000,
-      "close" : 298.252300000000,
-      "volume" : 78679246
-    }, 
-    {
-      "date" : "2020-03-02 15:54:00",
-      "open" : 296.190000000000,
-      "low" : 296.190000000000,
-      "high" : 297.430000000000,
-      "close" : 297.230000000000,
-      "volume" : 77982786
-    }, 
-    {
-      "date" : "2020-03-02 15:53:00",
-      "open" : 295.860000000000,
-      "low" : 295.860000000000,
-      "high" : 296.580000000000,
-      "close" : 296.190000000000,
-      "volume" : 77400704
-    }, 
-    {
-      "date" : "2020-03-02 15:52:00",
-      "open" : 297.100000000000,
-      "low" : 295.578600000000,
-      "high" : 297.100000000000,
-      "close" : 295.860000000000,
-      "volume" : 76885430
-    },
+const quote = [ 
+  {
+    "symbol" : "MSFT",
+    "name" : "Microsoft Corp",
+    "price" : 149.55000000,
+    "changesPercentage" : 0.38934135,
+    "change" : 0.58000183,
+    "dayLow" : 148.75000000,
+    "dayHigh" : 151.41000000,
+    "yearHigh" : 157.26000000,
+    "yearLow" : 103.10000000,
+    "marketCap" : 2472091320320.00000000,
+    "priceAvg50" : 149.04265000,
+    "priceAvg200" : 134.71935000,
+    "volume" : 97750498,
+    "avgVolume" : 78489468,
+    "exchange" : "NASDAQ",
+    "open" : 150.63000000,
+    "previousClose" : 148.97000000,
+    "eps" : 5.10800000,
+    "pe" : 29.27760500,
+    "earningsAnnouncement" : "2021-07-27T16:30:00.000+0000",
+    "sharesOutstanding" : 16530199400,
+    "timestamp" : 1631575899
+  },
+  {
+    "symbol" : "AAPL",
+    "name" : "Apple Inc.",
+    "price" : 149.55000000,
+    "changesPercentage" : 0.38934135,
+    "change" : 0.58000183,
+    "dayLow" : 148.75000000,
+    "dayHigh" : 151.41000000,
+    "yearHigh" : 157.26000000,
+    "yearLow" : 103.10000000,
+    "marketCap" : 2472091320320.00000000,
+    "priceAvg50" : 149.04265000,
+    "priceAvg200" : 134.71935000,
+    "volume" : 97750498,
+    "avgVolume" : 78489468,
+    "exchange" : "NASDAQ",
+    "open" : 150.63000000,
+    "previousClose" : 148.97000000,
+    "eps" : 5.10800000,
+    "pe" : 29.27760500,
+    "earningsAnnouncement" : "2021-07-27T16:30:00.000+0000",
+    "sharesOutstanding" : 16530199400,
+    "timestamp" : 1631575899
+  },
+  {
+    "symbol" : "AMZN",
+    "name" : "Amazon.com Inc.",
+    "price" : 149.55000000,
+    "changesPercentage" : 0.38934135,
+    "change" : 0.58000183,
+    "dayLow" : 148.75000000,
+    "dayHigh" : 151.41000000,
+    "yearHigh" : 157.26000000,
+    "yearLow" : 103.10000000,
+    "marketCap" : 2472091320320.00000000,
+    "priceAvg50" : 149.04265000,
+    "priceAvg200" : 134.71935000,
+    "volume" : 97750498,
+    "avgVolume" : 78489468,
+    "exchange" : "NASDAQ",
+    "open" : 150.63000000,
+    "previousClose" : 148.97000000,
+    "eps" : 5.10800000,
+    "pe" : 29.27760500,
+    "earningsAnnouncement" : "2021-07-27T16:30:00.000+0000",
+    "sharesOutstanding" : 16530199400,
+    "timestamp" : Date.now()
+  }   
 ]
 
-const testDate = new Date(dummyStockData[0].date)
+const testDate = new Date(quote[2].timestamp)
 const formattedDate = testDate.toLocaleString("en-US", {
   day: "2-digit",
   month: "short",
@@ -102,3 +100,54 @@ const formattedDate = testDate.toLocaleString("en-US", {
   minute: "2-digit"
 });
 console.log(formattedDate)
+
+export const requestStockQuote = () => {
+  return quote
+}
+
+export const generateQuote = () => {
+  const quoteData = []
+  const msftPrice = parseFloat(getRandomIntInclusive(230.00, 260.00))
+  const aaplPrice = parseFloat(getRandomIntInclusive(130.00, 165.00))
+  const amznPrice = parseFloat(getRandomIntInclusive(90.00, 100.00))
+  const timestamp = Date.now()
+  quoteData.push(
+    {
+      symbol : "MSFT",
+      name : "Microsoft Corp",
+      price : msftPrice,
+      changesPercentage : 0.38934135,
+      change: 0.58000183,
+      volume : 97750498,
+      exchange : "NASDAQ",
+      open : 150.63000000,
+      timestamp : timestamp
+    },
+    {
+      symbol : "AAPL",
+      name : "Apple Inc",
+      price : aaplPrice,
+      changesPercentage : 0.38934135,
+      change: 0.58000183,
+      volume : 97750498,
+      exchange : "NASDAQ",
+      open : 150.63000000,
+      timestamp : timestamp
+    },
+    {
+      symbol : "AMZN",
+      name : "Amazon.com Inc",
+      price : amznPrice,
+      changesPercentage : 0.38934135,
+      change: 0.58000183,
+      volume : 97750498,
+      exchange : "NASDAQ",
+      open : 150.63000000,
+      timestamp : timestamp
+    },
+  )
+  return quoteData
+}
+
+// export const stockData = regenerateData()
+export const stockData = generateQuote()
