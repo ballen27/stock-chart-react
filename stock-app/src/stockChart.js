@@ -3,29 +3,30 @@ import * as d3 from 'd3';
 
 import './index.css';
 
-function StockChart({ data, width, height }) {
+function StockChart({ data, width, height, name }) {
 
+const container = `#container-${name}`
   useEffect(() => {
     drawChart();
   });
   
   function drawChart() {
 
-    d3.select('#container')
+    d3.select(container)
       .select('svg')
       .remove();
-    d3.select('#container')
+    d3.select(container)
       .select('.tooltip')
       .remove();
 
     const margin = { top: 50, right: 50, bottom: 50, left: 50 };
-    const yMinValue = d3.min(data, d => d.price);
-    const yMaxValue = d3.max(data, d => d.price);
-    const xMinValue = d3.min(data, d => d.date);
-    const xMaxValue = d3.max(data, d => d.date);
-
+    const yMinValue = d3.min(data, d => (d.open.toFixed(2)));
+    const yMaxValue = d3.max(data, d => (d.open.toFixed(2)));
+    const xMinValue = d3.min(data, d => new Date(d.date));
+    const xMaxValue = d3.max(data, d => new Date(d.date));
+    console.log(xMinValue)
     const svg = d3
-        .select('#container')
+        .select(container)
         .append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
@@ -33,19 +34,19 @@ function StockChart({ data, width, height }) {
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
     const xScale = d3
-        .scaleLinear()
+        .scaleTime()
         .domain([xMinValue, xMaxValue])
         .range([0, width]);
 
     const yScale = d3
         .scaleLinear()
         .range([height, 0])
-        .domain([0, yMaxValue]);
+        .domain([yMinValue, yMaxValue]);
         
     const line = d3
         .line()
-        .x(d => xScale(d.date))
-        .y(d => yScale(d.price))
+        .x(d => xScale(new Date(d.date)))
+        .y(d => yScale(d.open))
             
     
     //Draw gridlines and tick markers
@@ -62,13 +63,19 @@ function StockChart({ data, width, height }) {
         .append('g')
         .attr('class', 'x-axis')
         .attr('transform', `translate(0,${height + 20})`)
-        .call(d3.axisBottom().scale(xScale).tickSize(0));
+        .call(
+            d3.axisBottom(xScale)
+            .tickSize(0)
+            .ticks(5));
 
     svg
         .append('g')
         .attr('class', 'y-axis')
         .attr('transform', `translate(-10,0)`)
-        .call(d3.axisLeft(yScale).tickSize(0));
+        .call(
+            d3.axisLeft(yScale)
+            .tickSize(0)
+            .tickFormat(x => `$${x.toFixed(2)}`));
 
     svg
         .append('path')
@@ -78,54 +85,55 @@ function StockChart({ data, width, height }) {
         .attr('d', line);
 
     //Setup tooltip
-    const focus = svg
-        .append('g')
-        .attr('class', 'focus')
-        .style('display', 'none');
+    // const focus = svg
+    //     .append('g')
+    //     .attr('class', 'focus')
+    //     .style('display', 'none');
 
-    focus.append('circle')
-        .attr('r', 5)
-        // .attr('class', 'circle');
+    // focus.append('circle')
+    //     .attr('r', 5)
+    //     // .attr('class', 'circle');
 
-    const tooltip = d3
-        .select('#container')
-        .append('div')
-        .attr('class', 'tooltip')
-        .style("opacity", 0);
+    // const tooltip = d3
+    //     .select('#container')
+    //     .append('div')
+    //     .attr('class', 'tooltip')
+    //     .style("opacity", 0);
 
-    //invisible rectangle to catch mouse events for tooltip hovering
-    svg
-        .append("rect")
-        .attr("class", "overlay")
-        .attr("width", width)
-        .attr("height", height)
-        .style("opacity", 0)
-        .on("mouseover", function() { focus.style("display", null); tooltip.style("display", null);  })
-        .on("mouseout", function() { focus.style("display", "none"); tooltip.style("display", "none"); })
-        .on("mousemove", mousemove);
+    // //invisible rectangle to catch mouse events for tooltip hovering
+    // svg
+    //     .append("rect")
+    //     .attr("class", "overlay")
+    //     .attr("width", width)
+    //     .attr("height", height)
+    //     .style("opacity", 0)
+    //     .on("mouseover", function() { focus.style("display", null); tooltip.style("display", null);  })
+    //     .on("mouseout", function() { focus.style("display", "none"); tooltip.style("display", "none"); })
+    //     .on("mousemove", mousemove);
 
-        function mousemove(event) {
-            const bisect = d3.bisector(d => d.date).left;
-            const xPos = d3.mouse(this)[0]; 
-            const x0 = bisect(data, xScale.invert(xPos));
-            const d0 = data[x0];
-            focus.attr(
-                'transform',
-                `translate(${xScale(d0.date)},${yScale(d0.price)})`,
-            );
-            tooltip
-                .transition()
-                .duration(200)
-                .style('opacity', 0.9);
-            tooltip
-                .html(d0.tooltipContent || d0.date)
-                .style(
-                    'transform',
-                    `translate(${xScale(d0.date) + 50}px,${yScale(d0.price) - 330}px)`,
-                );
-        }
+    //     function mousemove(event) {
+    //         const bisect = d3.bisector(d => new Date(d.date)).left;
+    //         const xPos = d3.mouse(this)[0]; 
+    //         const x0 = bisect(data, xScale.invert(xPos));
+    //         const d0 = data[x0];
+    //         console.log('d0',d0)
+    //         focus.attr(
+    //             'transform',
+    //             `translate(${xScale(new Date(d0.date))},${yScale(d0.open)})`,
+    //         );
+    //         tooltip
+    //             .transition()
+    //             .duration(200)
+    //             .style('opacity', 0.9);
+    //         tooltip
+    //             .html(d0.tooltipContent || d0.date)
+    //             .style(
+    //                 'transform',
+    //                 `translate(${xScale(new Date(d0.date)) + 50}px,${yScale(d0.open) - 330}px)`,
+    //             );
+    //     }
   }
-  return <div id="container" />;
+  return <div id={`container-${name}`} style={{marginLeft: '20px'}} />;
 }
 
 export default StockChart;
@@ -164,7 +172,7 @@ export default StockChart;
       
 //         data.forEach((d) => {
 //           d.date = parseTime(d.date);
-//           d.price = +d.price;
+//           d.open = +d.open;
 //         });
 //         console.log(data) 
     
@@ -185,7 +193,7 @@ export default StockChart;
 //         const y = d3.scaleLinear().range([height, 0]);
     
 //         x.domain(d3.extent(data, (d) => { return d.date; }));
-//         y.domain([0, d3.max(data, (d) => { return d.price; })]);
+//         y.domain([0, d3.max(data, (d) => { return d.open; })]);
       
 //         svg.append("g")
 //           .attr("transform", `translate(0, ${height})`)
@@ -197,7 +205,7 @@ export default StockChart;
 //         // add the Line
 //         const valueLine = d3.line()
 //         .x((d) => { return x(d.date); })
-//         .y((d) => { return y(d.price); });
+//         .y((d) => { return y(d.open); });
       
 //         svg.append("path")
 //           .data([data])

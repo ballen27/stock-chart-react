@@ -1,7 +1,7 @@
 import './index.css'
 import React from "react";
 import StockChart from './stockChart';
-import {stockData, getRandomIntInclusive} from './Utils'
+import {stockData, getRandomIntInclusive, dummyChartAapl, dummyChartAmzn, dummyChartMsft} from './Utils'
 
 
 const StockQuote = ({quote}) => {
@@ -10,15 +10,18 @@ const StockQuote = ({quote}) => {
   const stocks = {
     MSFT: {
       logo: 'https://api.twelvedata.com/logo/microsoft.com',
-      tooltipContent: `<b>date: </b>${quote.timestamp}<br><b>price: </b>${quote.price}`
+      tooltipContent: `<b>date: </b>${quote.timestamp}<br><b>price: </b>${quote.price}`,
+      data: dummyChartMsft
     },
     AAPL: {
       logo: 'https://financialmodelingprep.com/image-stock/AAPL.png',
-      tooltipContent: `<b>date: </b>${quote.timestamp}<br><b>price: </b>${quote.price}`
+      tooltipContent: `<b>date: </b>${quote.timestamp}<br><b>price: </b>${quote.price}`,
+      data: dummyChartAapl
     },
     AMZN: {
       logo: 'https://financialmodelingprep.com/image-stock/AMZN.png',
-      tooltipContent: `<b>date: </b>${quote.timestamp}<br><b>price: </b>${quote.price}`
+      tooltipContent: `<b>date: </b>${quote.timestamp}<br><b>price: </b>${quote.price}`,
+      data: dummyChartAmzn
     }
   }
 
@@ -39,7 +42,21 @@ const StockQuote = ({quote}) => {
             </div>
           </div>
           <div style={styles.chartContainer}>
-            {/* <StockChart  data={data} width={720} height={300}/> */}
+            <div style={styles.dateSelectContainer}>
+              <div style={styles.dateSelect}>
+                <p>24 H</p>
+              </div>
+              <div style={styles.dateDeselect}>
+                <p>7D</p>
+              </div>
+              <div style={styles.dateDeselect}>
+                <p>30D</p>
+              </div>
+              <div style={styles.dateDeselect}>
+                <p>1Y</p>
+              </div>
+            </div>
+            <StockChart  data={stocks[quote.symbol].data} width={700} height={300} name={quote.symbol} />
           </div>
         </div>
       </div>
@@ -81,6 +98,38 @@ const styles = {
   logo: {
     width: '50px',
     margin: '16px',
+  },
+  dateSelectContainer: {
+    display: 'flex',
+    margin: '16px 8px',
+  },
+  dateSelect: {
+    fontSize: '14px',
+    fontWeight: 'bold',
+    color: '#fff',
+    lineHeight: '30px',
+    width: '55px',
+    height: '35px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000',
+    borderRadius: '8px',
+    margin: '0 8px',
+  },
+  dateDeselect: {
+    fontSize: '14px',
+    fontWeight: 'bold',
+    color: '#000',
+    lineHeight: '30px',
+    width: '55px',
+    height: '35px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f7f7f7',
+    borderRadius: '8px',
+    margin: '0 8px',
   }
 }
   

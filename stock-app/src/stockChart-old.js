@@ -8,7 +8,6 @@ let priceArray = []
 
 const populateChart = () => {
     priceArray.push(getRandomInt(230, 260))
-    console.log(priceArray)
     return priceArray
 }
 
