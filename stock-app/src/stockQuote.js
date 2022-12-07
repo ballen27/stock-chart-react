@@ -59,7 +59,7 @@ const StockQuote = ({quote}) => {
                 <p>5Y</p>
               </div>
             </div>
-            <StockChart  data={stocks[quote.symbol].data} width={700} height={300} name={quote.symbol} />
+            <StockChart  data={stocks[quote.symbol].data} width={720} height={300} name={quote.symbol} />
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     padding: '24px',
-    width: '800px',
+    width: '850px',
     margin: '50px auto',
     backgroundColor: '#f7f7f7',
   },

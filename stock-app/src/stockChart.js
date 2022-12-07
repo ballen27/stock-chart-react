@@ -24,6 +24,7 @@ const container = `#container-${name}`
     const yMaxValue = d3.max(data, d => (d.open.toFixed(2)));
     const xMinValue = d3.min(data, d => new Date(d.date));
     const xMaxValue = d3.max(data, d => new Date(d.date));
+    const dateFormatter = d3.timeFormat("%b %d %I:%M%p");
 
     const svg = d3
         .select(container)
@@ -66,6 +67,7 @@ const container = `#container-${name}`
         .call(
             d3.axisBottom(xScale)
             .tickSize(0)
+            .tickFormat(dateFormatter)
             .ticks(5));
 
     svg
