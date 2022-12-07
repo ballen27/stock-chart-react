@@ -73,7 +73,7 @@ export const generateChart = () => {
 
 export const dummyChartMsft = [
   {
-    "date" : "2020-03-02 15:59:01",
+    "date" : "2020-03-02 15:59:00",
     "open" : 297.230000000000,
     "low" : 297.230000000000,
     "high" : 298.280000000000,

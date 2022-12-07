@@ -33,6 +33,11 @@ h1 {
         stroke-width: 1.5px;
     }
 
+    .overlay {
+      fill: none;
+      pointer-events: all;
+  }
+
     .focus circle {
         fill: steelblue;
     }

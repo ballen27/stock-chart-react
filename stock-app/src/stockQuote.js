@@ -1,7 +1,7 @@
 import './index.css'
 import React from "react";
 import StockChart from './stockChart';
-import {stockData, getRandomIntInclusive, dummyChartAapl, dummyChartAmzn, dummyChartMsft} from './Utils'
+import { dummyChartAapl, dummyChartAmzn, dummyChartMsft} from './Utils'
 
 
 const StockQuote = ({quote}) => {
