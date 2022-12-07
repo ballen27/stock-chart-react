@@ -13,3 +13,7 @@ The chart displays a set of prices and times based on the selected time frame fi
 
 The Chart is not related to the price (though it would be when working with real API data)
 
+Data:
+All of the data used to update the price, price change, price change percentage and the chart is based on the structure of a response from the FMP API https://site.financialmodelingprep.com/developer
+
+I looked into using the Morningstar API but was unable to find a developer/test account signup. 
